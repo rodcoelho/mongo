@@ -3,13 +3,10 @@
 from pymongo import MongoClient
 from pprint import pprint
 
-# connection to Mongo
-client = MongoClient('/data/db')
-# connection to database
-db = client.useful_database_name
 
 def insert():
     try:
+        column = db.column_name
         # prep/get data for payload
         userId = input('Enter Employee id :')
         userName = input('Enter Name :')
@@ -17,14 +14,13 @@ def insert():
         userCountry = input('Enter Country :')
 
         # payload insert to users table
-        payload = db.users.insert_one(
-            {
+        payload = {
                 "id": userId,
                 "name": userName,
                 "age": userAge,
                 "country": userCountry
-            })
-
+            }
+        column.insert(payload)
         print('\nInserted data successfully\n')
         pprint(payload)
 
@@ -57,9 +53,15 @@ def main():
         elif selection == '4':
             delete()
         else:
-            print('\n INVALID SELECTION \n')
+            print('\n EXIT \n')
+            break
 
 
 if __name__ == '__main__':
+    # connection to Mongo
+    conn = MongoClient('localhost', 27017)
+    # connection to database
+    db = conn.useful_database_name
     main()
+    conn.close()
 

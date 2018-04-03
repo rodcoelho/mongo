@@ -2,12 +2,12 @@
 
 from pymongo import MongoClient
 
-#################### create connection ####################
+######################################## create connection ###############################################
 # if working with a remote server, provide the IP Address as opposed to 'localhost'
 conn = MongoClient('localhost', 27017)
 
 
-#################### create a database ####################
+######################################## create a database ###############################################
 # option 1
 db = conn.testdb
 
@@ -15,7 +15,7 @@ db = conn.testdb
 # db = client['testdb']
 
 
-############# access a column in the database ##############
+######################################## access a column in the database #################################
 # option 1
 column = db.column_name
 
@@ -23,18 +23,18 @@ column = db.column_name
 # column = db['column_name']
 
 
-#################### query data in a column ####################
+######################################## query data in a column ##########################################
 data = testdb.column_name.find()
 for d in data:
     print('unpack the dictionary here')
 
 
-#################### add 'documents' to a table ####################
+######################################## add 'documents' to a table ########################################
 payload = {'info1': 'data1', 'info2': 'data2', 'info3': 'data3'}
 column.insert(payload)
 
 
-############################ update data ############################
+######################################## update data ######################################################
 # update one or many
 db.column_name.update_one(
     {"info1": "data1"}      # ... etc
@@ -51,6 +51,6 @@ db.column_name.delete_many(
     {"info1": "data1"}      # ... etc
 )
 
-#################### close connection ####################
+######################################## close connection #################################################
 conn.close()
 
