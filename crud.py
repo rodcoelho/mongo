@@ -33,7 +33,16 @@ def update():
 
 
 def read():
-    pass
+    try:
+        column = db.column_name
+        key = input('\nkey term: ')
+        value = input('\nvalue term: \n')
+        pprint(column.find_one({key: value}))
+    except:
+        print('Read error')
+
+
+
 
 
 def delete():
